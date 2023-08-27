@@ -1,3 +1,14 @@
+// ==UserScript==
+// @name         ts888jp
+// @namespace    http://your.namespace
+// @version      1.0
+// @description  Description of your extension
+// @author       Your Name
+// @match        https://www.tg888.ws/*
+// @match        https://tg888.ws/*
+// @grant        none
+// ==/UserScript==
+
 (function() {
     'use strict';
 
