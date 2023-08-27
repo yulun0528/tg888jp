@@ -106,7 +106,16 @@ function translatePage() {
     ];
     
             
+    const mobileAccount = document.querySelector('input[placeholder="輸入帳號"]');
+    if (mobileAccount) {
+        mobileAccount.placeholder = 'アカウント';
+    }
 
+    const mobilePassword = document.querySelector('input[placeholder="輸入密碼"]');
+    if (mobilePassword) {
+        mobilePassword.placeholder = 'パスワード';
+    }
+    
     
     homePage.forEach((obj)=>{
         const div = document.querySelector(obj[0]);
@@ -129,7 +138,7 @@ function translatePage() {
     if(pwdwrap){
     for (let node of pwdwrap.childNodes) {
         if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent='右にスワイプしてログイン'
+            node.textContent='右にスワイプ'
         }
     }
 }

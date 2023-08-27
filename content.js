@@ -91,7 +91,15 @@ function translatePage() {
 
     ];
     
-            
+    const mobileAccount = document.querySelector('input[placeholder="輸入帳號"]');
+    if (mobileAccount) {
+        mobileAccount.placeholder = 'アカウント';
+    }
+
+    const mobilePassword = document.querySelector('input[placeholder="輸入密碼"]');
+    if (mobilePassword) {
+        mobilePassword.placeholder = 'パスワード';
+    }
 
     
     homePage.forEach((obj)=>{
