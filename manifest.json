@@ -1,0 +1,18 @@
+{
+    "name": "tg888",
+    "version": "1.0.0",
+    "description": "tg888 translation",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": ["https://www.tg888.ws/*", "https://tg888.ws/*"],
+            "js": ["content.js"],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+    },
+    "permissions": [
+        "activeTab"
+    ]
+}
