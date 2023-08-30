@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tg888jp
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Description of your extension
 // @author       Your Name
 // @match        https://www.tg888.ws/*
