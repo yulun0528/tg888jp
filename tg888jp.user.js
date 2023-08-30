@@ -140,6 +140,9 @@ function translatePage() {
         { original: '走地中', translated:'ライブ'},
         { original: '走地', translated:'ライブ'},
         { original: '獨贏', translated:'単勝'},
+        { original: '單式', translated:'単勝'},
+        {original: '全部', translated:'すべて'},
+        {original:'美國職籃', translated:'エヌビーエー'},
         { original: '一輸二贏', translated:'1点負け2点勝ち'},
         { original: '單雙', translated:'奇数/偶数'},
         { original: '足球', translated:'サッカー'},
@@ -177,7 +180,8 @@ function translatePage() {
         { original: '聯盟排序', translated:'連盟順に並べ替え'},
         { original: '隊伍排序', translated:'チーム順に並べ替え'},
         { original: '每60秒更新', translated:'60秒ごとに更新'},
-        {original: '綜合過關', translated:'複合選択式'},
+        {original: '綜合過關', translated:'ミックスパーレイ'},
+        {original: '過關', translated:'ミックスパーレイ'},
         {original: '單注限額', translated:'単注限額'},
         {original: '單場最高', translated:'試合最高額'},
         {original: '可贏金額(參考)', translated:'予想払戻金の上限'},
@@ -195,8 +199,10 @@ function translatePage() {
         {original:'日期',translated:'日付'},
         {original:'本週',translated:'今週'},
         {original:'上週',translated:'先週'},
-        { original: '單', translated:'奇'},
-        { original: '雙', translated:'偶'},
+        {original:'更多', translated:'もっと'},
+        {original:'主勝',translated:'ホーム勝'},
+        {original:'客勝',translated:'アウェイ勝'},
+
     ];
     const allDiv = document.querySelectorAll('p, div, span, h6');
     allDiv.forEach((ele) => {
