@@ -85,12 +85,16 @@ function translatePage() {
         { original: '上半大小', translated:'前半トータル'},
         { original: '上半讓球', translated:'前半ランライン'},
         { original: '獨贏', translated:'単勝'},
-        { original: '一輸二贏', translated:'1点負け2点勝ち'}
-  
+        { original: '一輸二贏', translated:'1点負け2点勝ち'},
+        { original: '單雙', translated:'奇数/偶数'},
+        { original: '葡萄牙聯賽', translated: ''},
+        { original: '英格蘭職業聯賽)', translated: ''}
+    
 
 
     ];
     
+            
     const mobileAccount = document.querySelector('input[placeholder="輸入帳號"]');
     if (mobileAccount) {
         mobileAccount.placeholder = 'アカウント';
@@ -100,7 +104,7 @@ function translatePage() {
     if (mobilePassword) {
         mobilePassword.placeholder = 'パスワード';
     }
-
+    
     
     homePage.forEach((obj)=>{
         const div = document.querySelector(obj[0]);
@@ -123,18 +127,17 @@ function translatePage() {
     if(pwdwrap){
     for (let node of pwdwrap.childNodes) {
         if (node.nodeType === Node.TEXT_NODE) {
-            node.textContent='右にスワイプしてログイン'
+            node.textContent='右にスワイプ'
         }
     }
 }
 
     const allDiv = document.querySelectorAll('p, div, span');
     allDiv.forEach((div) => {
-        const translation = translations.find(item => item.original === div.textContent);
-        if (translation) {
-            div.textContent = translation.translated;
-        }
+    translations.forEach((translation) => {
+        div.textContent = div.textContent.replace(translation.original, translation.translated);
     });
+});
 }
 
 
