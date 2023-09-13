@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         tg888jp
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.3
 // @description  Description of your extension
 // @author       Your Name
 // @match        https://www.tg888.ws/*
@@ -38,7 +38,7 @@ fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.j
 function translatePage() {
 
  
-    const allDiv = document.querySelectorAll('p, div, span, h6');
+    const allDiv = document.querySelectorAll('p, div, span, h6, h5,button');
     allDiv.forEach((ele) => {
 
         if(ele.textContent && ele.childElementCount === 0){
