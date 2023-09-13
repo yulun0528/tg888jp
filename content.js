@@ -1,4 +1,5 @@
-let homePage = [
+const  exchangeRate = 0.3;
+const  homePage = [
     ['.clear_wrap .back', 'PC版に戻る'],
     ['.clear_wrap .clear', '履歴をクリア'],
     ['.input_wrap li:nth-child(1) input', 'アカウント'],
@@ -91,7 +92,7 @@ const queryString =
 '[ng-bind="::totalLast.AllBetAmountLast"],'+
 '[ng-bind="::totalLast.AllEffectiveBetLast"],'+
 '[ng-bind="::totalLast.AllResultLast |number:2"],'+
-'.count_box p';
+'.count_box p'
 
 
 
@@ -100,7 +101,6 @@ if (price) {
     price.forEach((p)=>{
         const taiwaneseDollarAmount = parseFloat(p.textContent); 
 
-        const exchangeRate = 0.3; 
 
         const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
       
@@ -110,11 +110,56 @@ if (price) {
     })
 }
 
+const removeNT = document.querySelectorAll('.currency');
+if (removeNT) {
+    removeNT.forEach((p)=>{ 
+        p.textContent = '$';
+    
+    })
+}
+
+const pElements = document.querySelectorAll('.footer_blue_box_2.zh-tw .box p, .list.box_4 div:nth-child(4), .result_wrap .box p');
+
+pElements.forEach((pElement) => {
+    const num = pElement.textContent.replace('.','').replace(',','');
+  const taiwaneseDollarAmount = parseFloat(num);
+  
+  if (!isNaN(taiwaneseDollarAmount)) { // 将 isNaN 放在全局作用域上
+    const exchangeRate = 0.3; // 假设汇率是 0.3
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+
+    pElement.textContent = `${taiwaneseDollarAmount} (¥${japaneseYenAmount.toFixed(2)})`;
+  }
+});
+
+const originalParagraphElement = document.querySelector('.u_money');
+if(originalParagraphElement){
+    const moneyText = originalParagraphElement.childNodes[1].textContent.trim();
+    const num = moneyText.replace('.','').replace(',','');
+    const taiwaneseDollarAmount = parseFloat(num);
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+    const existingParagraph = document.querySelector('.u_money .added');
+    console.log(moneyText);
+    if (!existingParagraph) {
+        const newParagraphElement = document.createElement('span');
+        newParagraphElement.textContent = "(0)";
+        newParagraphElement.classList.add('added');
+        originalParagraphElement.appendChild(  newParagraphElement);
+    }else{
+        existingParagraph.textContent =`(¥ ${japaneseYenAmount})`;
+    }
+}
+
+const accbox = document.querySelector('.acc_box');
+if(accbox){
+accbox.childNodes[1].childNodes[0].textContent = 'アカウント:';
+accbox.childNodes[4].childNodes[0].textContent = '今日信用枠:';
+accbox.childNodes[10].textContent = '';
+}
 const maxcredit = document.querySelector('.acc_box span[ng-bind="memberData.maxcredit"]');
 if(maxcredit){
     const taiwaneseDollarAmount = parseFloat(maxcredit.textContent); 
 
-    const exchangeRate = 0.3; 
 
     const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
   
@@ -124,6 +169,8 @@ if(maxcredit){
 }
 
 }
+
+
 
 
 

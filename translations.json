@@ -548,6 +548,18 @@
     "translated": "最新のベット"
   },
   {
+    "original": "即時注單",
+    "translated": "ライブベット"
+  },
+  {
+    "original": "歷史注單",
+    "translated": "ヒストリーベット"
+  },
+  {
+    "original": "投注記錄",
+    "translated": "ベット履歴"
+  },
+  {
     "original": "即將開賽",
     "translated": "まもなく開始"
   },
@@ -694,5 +706,9 @@
   {
     "original": "修改密碼",
     "translated": "パスワードの変更"
+  },
+  {
+    "original": "賽事結果",
+    "translated": "試合結果"
   }
 ]
