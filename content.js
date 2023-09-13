@@ -1,3 +1,17 @@
+// ==UserScript==
+// @name         tg888jp
+// @namespace    http://tampermonkey.net/
+// @version      1.4
+// @description  Description of your extension
+// @author       Your Name
+// @match        https://www.tg888.ws/*
+// @match        https://tg888.ws/*
+// @grant        none
+// @license       GPL-3.0-or-later; https://www.gnu.org/licenses/gpl-3.0.txt
+// ==/UserScript==
+
+
+
 const  exchangeRate = 0.3;
 const  homePage = [
     ['.clear_wrap .back', 'PC版に戻る'],
@@ -118,7 +132,7 @@ if (removeNT) {
     })
 }
 
-const pElements = document.querySelectorAll('.footer_blue_box_2.zh-tw .box p, .list.box_4 div:nth-child(4), .result_wrap .box p');
+const pElements = document.querySelectorAll('.footer_blue_box_2.zh-tw .box p, .list.box_4 div:nth-child(4), .result_wrap .box p, .t_record .line div p');
 
 pElements.forEach((pElement) => {
     const num = pElement.textContent.replace('.','').replace(',','');
@@ -128,7 +142,7 @@ pElements.forEach((pElement) => {
     const exchangeRate = 0.3; // 假设汇率是 0.3
     const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
 
-    pElement.textContent = `${taiwaneseDollarAmount} (¥${japaneseYenAmount.toFixed(2)})`;
+    pElement.textContent = `${taiwaneseDollarAmount} (¥${japaneseYenAmount})`;
   }
 });
 
@@ -177,3 +191,6 @@ if(maxcredit){
 
 
 setInterval(translatePage, 100);
+
+
+
