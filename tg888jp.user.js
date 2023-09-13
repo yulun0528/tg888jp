@@ -12,7 +12,8 @@
 
 
 
-let homePage = [
+const  exchangeRate = 0.3;
+const  homePage = [
     ['.clear_wrap .back', 'PC版に戻る'],
     ['.clear_wrap .clear', '履歴をクリア'],
     ['.input_wrap li:nth-child(1) input', 'アカウント'],
@@ -32,7 +33,7 @@ fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.j
 })
 .catch(error => {
     //second
-    fetch('https://drive.google.com/uc?export=download&id=1f4JQVWuzu81OlRtZt4X2hWTlDpEKf3Rd')
+    fetch('https://json.extendsclass.com/bin/f15bfa1e071d')
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -47,7 +48,7 @@ fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.j
 function translatePage() {
 
  
-    const allDiv = document.querySelectorAll('p, div, span, h6, h5,button');
+    const allDiv = document.querySelectorAll('p, div, span, h6, h5, button');
     allDiv.forEach((ele) => {
 
         if(ele.textContent && ele.childElementCount === 0){
@@ -63,10 +64,7 @@ function translatePage() {
         mobileAccount.placeholder = 'アカウント';
     }
 
-    const mobilePassword = document.querySelector('input[placeholder="輸入密碼"]');
-    if (mobilePassword) {
-        mobilePassword.placeholder = 'パスワード';
-    }
+
 
     
     homePage.forEach((obj)=>{
@@ -95,8 +93,100 @@ function translatePage() {
     }
 }
 
+const queryString = 
+'[ng-init="total.AllBetAmount=total.AllBetAmount+list.gold"],'+
+'[ng-init="totalLast.AllBetAmountLast=totalLast.AllBetAmountLast+list.gold"],'+
+'[ng-init="total.AllEffectiveBet=total.AllEffectiveBet+list.effective_gold"],'+
+'[ng-init="totalLast.AllEffectiveBetLast=totalLast.AllEffectiveBetLast+list.effective_gold"],'+
+'[ng-init="total.AllResult=total.AllResult+list.win+list.water"],'+
+'[ng-init="totalLast.AllResultLast=totalLast.AllResultLast+list.win+list.water"],'+
+'[ng-bind="total.AllBetAmount"],'+
+'[ng-bind="total.AllEffectiveBet"],'+
+'[ng-bind="total.AllResult |number:2"],'+
+'[ng-bind="::totalLast.AllBetAmountLast"],'+
+'[ng-bind="::totalLast.AllEffectiveBetLast"],'+
+'[ng-bind="::totalLast.AllResultLast |number:2"],'+
+'.count_box p'
+
+
+
+const price= document.querySelectorAll(queryString);
+if (price) {
+    price.forEach((p)=>{
+        const taiwaneseDollarAmount = parseFloat(p.textContent); 
+
+
+        const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+      
+        const formattedAmount = `${taiwaneseDollarAmount} (¥${japaneseYenAmount})`;
+      
+        p.textContent = formattedAmount;
+    })
+}
+
+const removeNT = document.querySelectorAll('.currency');
+if (removeNT) {
+    removeNT.forEach((p)=>{ 
+        p.textContent = '$';
+    
+    })
+}
+
+const pElements = document.querySelectorAll('.footer_blue_box_2.zh-tw .box p, .list.box_4 div:nth-child(4), .result_wrap .box p');
+
+pElements.forEach((pElement) => {
+    const num = pElement.textContent.replace('.','').replace(',','');
+  const taiwaneseDollarAmount = parseFloat(num);
+  
+  if (!isNaN(taiwaneseDollarAmount)) { // 将 isNaN 放在全局作用域上
+    const exchangeRate = 0.3; // 假设汇率是 0.3
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+
+    pElement.textContent = `${taiwaneseDollarAmount} (¥${japaneseYenAmount.toFixed(2)})`;
+  }
+});
+
+const originalParagraphElement = document.querySelector('.u_money');
+if(originalParagraphElement){
+    const moneyText = originalParagraphElement.childNodes[1].textContent.trim();
+    const num = moneyText.replace('.','').replace(',','');
+    const taiwaneseDollarAmount = parseFloat(num);
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+    const existingParagraph = document.querySelector('.u_money .added');
+    console.log(moneyText);
+    if (!existingParagraph) {
+        const newParagraphElement = document.createElement('span');
+        newParagraphElement.textContent = "(0)";
+        newParagraphElement.classList.add('added');
+        originalParagraphElement.appendChild(  newParagraphElement);
+    }else{
+        existingParagraph.textContent =`(¥ ${japaneseYenAmount})`;
+    }
+}
+
+const accbox = document.querySelector('.acc_box');
+if(accbox){
+accbox.childNodes[1].childNodes[0].textContent = 'アカウント:';
+accbox.childNodes[4].childNodes[0].textContent = '今日信用枠:';
+accbox.childNodes[10].textContent = '';
+}
+const maxcredit = document.querySelector('.acc_box span[ng-bind="memberData.maxcredit"]');
+if(maxcredit){
+    const taiwaneseDollarAmount = parseFloat(maxcredit.textContent); 
+
+
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+  
+    const formattedAmount = `<br>${taiwaneseDollarAmount} (¥${japaneseYenAmount})`;
+  
+    maxcredit.innerHTML = formattedAmount;
+}
 
 }
+
+
+
+
 
 
 
