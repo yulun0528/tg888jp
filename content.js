@@ -9,14 +9,23 @@ let homePage = [
 ]
 
 let translations=[];
-fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.json')
+//first
+fetch('https://json.extendsclass.com/bin/f15bfa1e071d')
 .then(response => response.json())
 .then(data => {
     console.log(data);
     translations=data
 })
 .catch(error => {
-  console.error('Error fetching JSON:', error);
+    //second
+    fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            translations=data
+    }).catch(error => {
+        console.error('Error fetching JSON:', error);
+      });
 });
 
 
@@ -24,7 +33,7 @@ fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.j
 function translatePage() {
 
  
-    const allDiv = document.querySelectorAll('p, div, span, h6, h5,button');
+    const allDiv = document.querySelectorAll('p, div, span, h6, h5, button');
     allDiv.forEach((ele) => {
 
         if(ele.textContent && ele.childElementCount === 0){
@@ -40,10 +49,7 @@ function translatePage() {
         mobileAccount.placeholder = 'アカウント';
     }
 
-    const mobilePassword = document.querySelector('input[placeholder="輸入密碼"]');
-    if (mobilePassword) {
-        mobilePassword.placeholder = 'パスワード';
-    }
+
 
     
     homePage.forEach((obj)=>{
@@ -72,11 +78,55 @@ function translatePage() {
     }
 }
 
+const queryString = 
+'[ng-init="total.AllBetAmount=total.AllBetAmount+list.gold"],'+
+'[ng-init="totalLast.AllBetAmountLast=totalLast.AllBetAmountLast+list.gold"],'+
+'[ng-init="total.AllEffectiveBet=total.AllEffectiveBet+list.effective_gold"],'+
+'[ng-init="totalLast.AllEffectiveBetLast=totalLast.AllEffectiveBetLast+list.effective_gold"],'+
+'[ng-init="total.AllResult=total.AllResult+list.win+list.water"],'+
+'[ng-init="totalLast.AllResultLast=totalLast.AllResultLast+list.win+list.water"],'+
+'[ng-bind="total.AllBetAmount"],'+
+'[ng-bind="total.AllEffectiveBet"],'+
+'[ng-bind="total.AllResult |number:2"],'+
+'[ng-bind="::totalLast.AllBetAmountLast"],'+
+'[ng-bind="::totalLast.AllEffectiveBetLast"],'+
+'[ng-bind="::totalLast.AllResultLast |number:2"],'+
+'.count_box p';
+
+
+
+const price= document.querySelectorAll(queryString);
+if (price) {
+    price.forEach((p)=>{
+        const taiwaneseDollarAmount = parseFloat(p.textContent); 
+
+        const exchangeRate = 0.3; 
+
+        const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+      
+        const formattedAmount = `${taiwaneseDollarAmount} (¥${japaneseYenAmount})`;
+      
+        p.textContent = formattedAmount;
+    })
+}
+
+const maxcredit = document.querySelector('.acc_box span[ng-bind="memberData.maxcredit"]');
+if(maxcredit){
+    const taiwaneseDollarAmount = parseFloat(maxcredit.textContent); 
+
+    const exchangeRate = 0.3; 
+
+    const japaneseYenAmount = taiwaneseDollarAmount * exchangeRate;
+  
+    const formattedAmount = `<br>${taiwaneseDollarAmount} (¥${japaneseYenAmount})`;
+  
+    maxcredit.innerHTML = formattedAmount;
+}
 
 }
 
 
 
-setInterval(translatePage, 100);
 
-    
+
+setInterval(translatePage, 100);

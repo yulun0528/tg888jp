@@ -23,6 +23,7 @@ let homePage = [
 ]
 
 let translations=[];
+//first
 fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.json')
 .then(response => response.json())
 .then(data => {
@@ -30,7 +31,15 @@ fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.j
     translations=data
 })
 .catch(error => {
-  console.error('Error fetching JSON:', error);
+    //second
+    fetch('https://drive.google.com/uc?export=download&id=1f4JQVWuzu81OlRtZt4X2hWTlDpEKf3Rd')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            translations=data
+    }).catch(error => {
+        console.error('Error fetching JSON:', error);
+      });
 });
 
 
@@ -93,4 +102,5 @@ function translatePage() {
 
 setInterval(translatePage, 100);
 
-    
+
+
