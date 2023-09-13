@@ -11,7 +11,7 @@ const  homePage = [
 
 let translations=[];
 //first
-fetch('https://json.extendsclass.com/bin/f15bfa1e071d')
+fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.json')
 .then(response => response.json())
 .then(data => {
     console.log(data);
@@ -19,7 +19,7 @@ fetch('https://json.extendsclass.com/bin/f15bfa1e071d')
 })
 .catch(error => {
     //second
-    fetch('https://raw.githubusercontent.com/yulun0528/tg888jp/master/translations.json')
+    fetch('https://json.extendsclass.com/bin/f15bfa1e071d')
         .then(response => response.json())
         .then(data => {
             console.log(data);
